@@ -1,0 +1,17 @@
+[
+  {
+    "string": "FirstName",
+    "isAttribute": true,
+    "characters": 1,
+    "upperOrLower": "AllUpper"
+  },
+  {
+    "string": ".",
+    "isAttribute": false
+  },
+  {
+    "string": "FamilyName",
+    "isAttribute": true,
+    "upperOrLower": "Upper"
+  }
+]

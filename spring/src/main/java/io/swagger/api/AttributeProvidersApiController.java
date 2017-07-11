@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 import java.util.List;
 
 
@@ -22,10 +26,18 @@ import java.util.List;
 
 @Controller
 public class AttributeProvidersApiController implements AttributeProvidersApi {
+	
+	ClassLoader classLoader = getClass().getClassLoader();
+	ObjectMapper o = new ObjectMapper();
 
     public ResponseEntity<List<AttributeProvider>> getAttributeProviders() {
-        // do some magic!
-        return new ResponseEntity<List<AttributeProvider>>(HttpStatus.OK);
+        try {
+			List<AttributeProvider> list = o.readValue(classLoader.getResource("ap.json"), new TypeReference<List<AttributeProvider>>(){});
+			return new ResponseEntity<List<AttributeProvider>>(list, HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<AttributeProvider>>(HttpStatus.NOT_FOUND);
+		}
     }
 
     public ResponseEntity<List<StringToken>> getMapping(@ApiParam(value = "Id of the AP") @RequestParam(value = "apid", required = false) String apid) {
