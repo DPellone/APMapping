@@ -3,7 +3,7 @@
     "string": "FirstName",
     "isAttribute": true,
     "characters": 1,
-    "upperOrLower": "AllUpper"
+    "upperOrLower": "AllLower"
   },
   {
     "string": ".",
@@ -12,6 +12,6 @@
   {
     "string": "FamilyName",
     "isAttribute": true,
-    "upperOrLower": "Upper"
+    "upperOrLower": "AllLower"
   }
 ]

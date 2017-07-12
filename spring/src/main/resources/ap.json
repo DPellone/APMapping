@@ -1,7 +1,7 @@
 [
   {
     "id": "myAP",
-    "address": "ap-example.net",
+    "address": "http://192.168.89.133/idp/profile/SAML2/Redirect/SSO",
     "name": "AP di prova"
   }
 ]
