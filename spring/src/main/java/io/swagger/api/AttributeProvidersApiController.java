@@ -19,6 +19,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 
@@ -32,17 +33,28 @@ public class AttributeProvidersApiController implements AttributeProvidersApi {
 
     public ResponseEntity<List<AttributeProvider>> getAttributeProviders() {
         try {
-			List<AttributeProvider> list = o.readValue(classLoader.getResource("ap.json"), new TypeReference<List<AttributeProvider>>(){});
+        	URL APlist = classLoader.getResource("ap.json");
+        	if(APlist == null)
+        		return new ResponseEntity<List<AttributeProvider>>(HttpStatus.NOT_FOUND);
+			List<AttributeProvider> list = o.readValue(APlist, new TypeReference<List<AttributeProvider>>(){});
 			return new ResponseEntity<List<AttributeProvider>>(list, HttpStatus.OK);
 		} catch (IOException e) {
 			e.printStackTrace();
-			return new ResponseEntity<List<AttributeProvider>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<AttributeProvider>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
     }
 
     public ResponseEntity<List<StringToken>> getMapping(@ApiParam(value = "Id of the AP") @RequestParam(value = "apid", required = false) String apid) {
-        // do some magic!
-        return new ResponseEntity<List<StringToken>>(HttpStatus.OK);
+        URL mapping;
+    	if(apid == null || (mapping = classLoader.getResource(apid + ".json")) == null)
+        	return new ResponseEntity<List<StringToken>>(HttpStatus.NOT_FOUND);
+        try {
+			List<StringToken> list = o.readValue(mapping, new TypeReference<List<StringToken>>(){});
+			return new ResponseEntity<List<StringToken>>(list, HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<StringToken>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
     }
 
 }
