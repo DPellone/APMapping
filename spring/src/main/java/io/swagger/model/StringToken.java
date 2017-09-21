@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 /**
  * StringToken
  */
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-07-11T10:46:35.862Z")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-09-21T08:29:03.401Z")
 
 public class StringToken   {
   @JsonProperty("string")

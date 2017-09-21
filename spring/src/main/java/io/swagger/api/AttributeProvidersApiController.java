@@ -1,7 +1,7 @@
 package io.swagger.api;
 
+import io.swagger.model.APinfo;
 import io.swagger.model.AttributeProvider;
-import io.swagger.model.StringToken;
 
 import io.swagger.annotations.*;
 
@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-07-11T10:46:35.862Z")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-09-21T08:29:03.401Z")
 
 @Controller
 public class AttributeProvidersApiController implements AttributeProvidersApi {
@@ -28,9 +28,9 @@ public class AttributeProvidersApiController implements AttributeProvidersApi {
         return new ResponseEntity<List<AttributeProvider>>(HttpStatus.OK);
     }
 
-    public ResponseEntity<List<StringToken>> getMapping(@ApiParam(value = "Id of the AP") @RequestParam(value = "apid", required = false) String apid) {
+    public ResponseEntity<APinfo> getMapping(@ApiParam(value = "Id of the AP") @RequestParam(value = "apid", required = false) String apid) {
         // do some magic!
-        return new ResponseEntity<List<StringToken>>(HttpStatus.OK);
+        return new ResponseEntity<APinfo>(HttpStatus.OK);
     }
 
 }

@@ -9,14 +9,11 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * AttributeProvider
  */
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-07-11T10:46:35.862Z")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-09-21T08:29:03.401Z")
 
 public class AttributeProvider   {
   @JsonProperty("id")
   private String id = null;
-
-  @JsonProperty("address")
-  private String address = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -37,24 +34,6 @@ public class AttributeProvider   {
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  public AttributeProvider address(String address) {
-    this.address = address;
-    return this;
-  }
-
-   /**
-   * Get address
-   * @return address
-  **/
-  @ApiModelProperty(example = "ap-example.it:8080", required = true, value = "")
-  public String getAddress() {
-    return address;
-  }
-
-  public void setAddress(String address) {
-    this.address = address;
   }
 
   public AttributeProvider name(String name) {
@@ -86,13 +65,12 @@ public class AttributeProvider   {
     }
     AttributeProvider attributeProvider = (AttributeProvider) o;
     return Objects.equals(this.id, attributeProvider.id) &&
-        Objects.equals(this.address, attributeProvider.address) &&
         Objects.equals(this.name, attributeProvider.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, address, name);
+    return Objects.hash(id, name);
   }
 
   @Override
@@ -101,7 +79,6 @@ public class AttributeProvider   {
     sb.append("class AttributeProvider {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    address: ").append(toIndentedString(address)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
