@@ -1,17 +1,20 @@
-[
-  {
-    "string": "FirstName",
-    "isAttribute": true,
-    "characters": 1,
-    "upperOrLower": "AllLower"
-  },
-  {
-    "string": ".",
-    "isAttribute": false
-  },
-  {
-    "string": "FamilyName",
-    "isAttribute": true,
-    "upperOrLower": "AllLower"
-  }
-]
+{
+  "url": "http://192.168.89.133/idp/profile/SAML2/POST/SSO",
+  "token": [
+    {
+      "string": "FirstName",
+      "isAttribute": true,
+      "characters": 1,
+      "upperOrLower": "AllLower"
+    },
+    {
+      "string": ".",
+      "isAttribute": false
+    },
+    {
+      "string": "FamilyName",
+      "isAttribute": true,
+      "upperOrLower": "AllLower"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 package io.swagger.api;
 
+import io.swagger.model.APinfo;
 import io.swagger.model.AttributeProvider;
-import io.swagger.model.StringToken;
 
 import io.swagger.annotations.*;
 
@@ -23,16 +23,15 @@ import java.net.URL;
 import java.util.List;
 
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-07-11T10:46:35.862Z")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-09-21T08:29:13.741Z")
 
 @Controller
 public class AttributeProvidersApiController implements AttributeProvidersApi {
-	
 	ClassLoader classLoader = getClass().getClassLoader();
 	ObjectMapper o = new ObjectMapper();
 
     public ResponseEntity<List<AttributeProvider>> getAttributeProviders() {
-        try {
+    	try {
         	URL APlist = classLoader.getResource("ap.json");
         	if(APlist == null)
         		return new ResponseEntity<List<AttributeProvider>>(HttpStatus.NOT_FOUND);
@@ -44,16 +43,16 @@ public class AttributeProvidersApiController implements AttributeProvidersApi {
 		}
     }
 
-    public ResponseEntity<List<StringToken>> getMapping(@ApiParam(value = "Id of the AP") @RequestParam(value = "apid", required = false) String apid) {
-        URL mapping;
+    public ResponseEntity<APinfo> getMapping(@ApiParam(value = "Id of the AP") @RequestParam(value = "apid", required = false) String apid) {
+    	URL mapping;
     	if(apid == null || (mapping = classLoader.getResource(apid + ".json")) == null)
-        	return new ResponseEntity<List<StringToken>>(HttpStatus.NOT_FOUND);
+        	return new ResponseEntity<APinfo>(HttpStatus.NOT_FOUND);
         try {
-			List<StringToken> list = o.readValue(mapping, new TypeReference<List<StringToken>>(){});
-			return new ResponseEntity<List<StringToken>>(list, HttpStatus.OK);
+        	APinfo info = o.readValue(mapping, new TypeReference<APinfo>(){});
+			return new ResponseEntity<APinfo>(info, HttpStatus.OK);
 		} catch (IOException e) {
 			e.printStackTrace();
-			return new ResponseEntity<List<StringToken>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<APinfo>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
     }
 
