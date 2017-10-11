@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.List;
 
 
@@ -27,12 +28,11 @@ import java.util.List;
 
 @Controller
 public class AttributeProvidersApiController implements AttributeProvidersApi {
-	ClassLoader classLoader = getClass().getClassLoader();
 	ObjectMapper o = new ObjectMapper();
 
     public ResponseEntity<List<AttributeProvider>> getAttributeProviders() {
     	try {
-        	URL APlist = classLoader.getResource("ap.json");
+        	URL APlist = Paths.get("ap.json").toUri().toURL();
         	if(APlist == null)
         		return new ResponseEntity<List<AttributeProvider>>(HttpStatus.NOT_FOUND);
 			List<AttributeProvider> list = o.readValue(APlist, new TypeReference<List<AttributeProvider>>(){});
@@ -45,9 +45,9 @@ public class AttributeProvidersApiController implements AttributeProvidersApi {
 
     public ResponseEntity<APinfo> getMapping(@ApiParam(value = "Id of the AP") @RequestParam(value = "apid", required = false) String apid) {
     	URL mapping;
-    	if(apid == null || (mapping = classLoader.getResource(apid + ".json")) == null)
-        	return new ResponseEntity<APinfo>(HttpStatus.NOT_FOUND);
-        try {
+    	try {
+	    	if(apid == null || (mapping = Paths.get(apid + ".json").toUri().toURL()) == null)
+	        	return new ResponseEntity<APinfo>(HttpStatus.NOT_FOUND);
         	APinfo info = o.readValue(mapping, new TypeReference<APinfo>(){});
 			return new ResponseEntity<APinfo>(info, HttpStatus.OK);
 		} catch (IOException e) {

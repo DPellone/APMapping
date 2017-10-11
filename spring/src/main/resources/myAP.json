@@ -1,5 +1,5 @@
 {
-  "url": "http://192.168.89.133/idp/profile/SAML2/POST/SSO",
+  "url": "http://192.168.89.133/idp/shibboleth",
   "token": [
     {
       "string": "FirstName",
