@@ -4,22 +4,27 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableSwagger2
 @ComponentScan(basePackages = "io.swagger")
-public class Swagger2SpringBoot implements CommandLineRunner {
+public class Swagger2SpringBoot extends WebSecurityConfigurerAdapter {
 
-	@Override
-	public void run(String... arg0) throws Exception {
-		if (arg0.length > 0 && arg0[0].equals("exitcode")) {
-			throw new ExitException();
-		}
-	}
-
+	
 	public static void main(String[] args) throws Exception {
 		new SpringApplication(Swagger2SpringBoot.class).run(args);
 	}
@@ -33,4 +38,27 @@ public class Swagger2SpringBoot implements CommandLineRunner {
 		}
 
 	}
+	
+	protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().anyRequest().authenticated()
+          .and()
+          .x509()
+            .subjectPrincipalRegex("CN=(.*?)(?:,|$)")
+            .userDetailsService(userDetailsService());
+    }
+ 
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String username) {
+                if (username.equals("Node eIDAS")) {
+                    return new User(username, "", 
+                      AuthorityUtils
+                        .commaSeparatedStringToAuthorityList("ROLE_USER"));
+                }
+				return null;
+            }
+        };
+    }
 }
