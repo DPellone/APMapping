@@ -52,12 +52,9 @@ public class Swagger2SpringBoot extends WebSecurityConfigurerAdapter {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String username) {
-                if (username.equals("Node eIDAS")) {
-                    return new User(username, "", 
-                      AuthorityUtils
-                        .commaSeparatedStringToAuthorityList("ROLE_USER"));
-                }
-				return null;
+                return new User(username, "", 
+                  AuthorityUtils
+                    .commaSeparatedStringToAuthorityList("ROLE_USER"));
             }
         };
     }

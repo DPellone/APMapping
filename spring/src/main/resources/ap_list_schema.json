@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "definitions": {},
+  "id": "http://example.com/apMappingList.json",
+  "items": {
+    "id": "/items",
+    "properties": {
+      "id": {
+        "default": "",
+        "description": "Id of the AP.",
+        "id": "/items/properties/id",
+        "title": "The Id Schema.",
+        "type": "string"
+      },
+      "name": {
+        "default": "",
+        "description": "Friendly name of the AP.",
+        "id": "/items/properties/name",
+        "title": "The Name Schema.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "name"
+    ],
+    "type": "object"
+  },
+  "type": "array"
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "definitions": {},
+  "id": "http://example.com/apMapping.json",
+  "properties": {
+    "token": {
+      "id": "/properties/token",
+      "items": {
+        "id": "/properties/token/items",
+        "properties": {
+          "characters": {
+            "default": 0,
+            "description": "Number of characters taken from the attribute.",
+            "id": "/properties/token/items/properties/characters",
+            "title": "The Characters Schema.",
+            "type": "integer"
+          },
+          "isAttribute": {
+            "default": false,
+            "description": "Points out if the token is linked to an attribute.",
+            "id": "/properties/token/items/properties/isAttribute",
+            "title": "The Isattribute Schema.",
+            "type": "boolean"
+          },
+          "string": {
+            "default": "",
+            "description": "Name of the attribute or string to replace.",
+            "id": "/properties/token/items/properties/string",
+            "title": "The String Schema.",
+            "type": "string"
+          },
+          "upperOrLower": {
+            "default": "",
+            "description": "Points out transformations to be done on the attribute.",
+            "enum": [
+              "AllUpper",
+              "AllLower"
+            ], 
+            "id": "/properties/token/items/properties/upperOrLower",
+            "title": "The Upperorlower Schema.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "upperOrLower",
+          "isAttribute"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "url": {
+      "default": "",
+      "description": "The URL of the AP metadata.",
+      "id": "/properties/url",
+      "title": "The Url Schema.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "url",
+    "token"
+  ],
+  "type": "object"
+}
